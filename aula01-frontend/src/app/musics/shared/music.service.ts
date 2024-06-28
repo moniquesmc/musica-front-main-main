@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Music } from './music';
+import { Musica } from './musica';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,7 +11,7 @@ export class MusicService {
 
   constructor(private http: HttpClient) {}
 
-  musics: Music[] =[]
+  musics: Musica[] =[]
 
   listar(): Observable<any> {
     return this.http.get(`${this.baseUrl}/lista`);
@@ -26,42 +26,23 @@ export class MusicService {
   }
 
   getById(id:number){
-    const music = this.musics.find((value: Music): boolean => value.id == id);
+    const music = this.musics.find((value: Musica): boolean => value.id == id);
     return music;
   }
 
-
-  private storelist(){
-    window.localStorage.setItem('list-musics', JSON.stringify(this.musics));
-  }
-
-
-  save(music: Music): void{
-    if(music.id){
-      const musicArr = this.getById(music.id);
-      if(musicArr){
-        musicArr.nomeMusica = music.nomeMusica
-        musicArr.dataLancamento = music.dataLancamento
-        musicArr.duracao = music.duracao
-        musicArr.nomeAlbum = music.nomeAlbum
-        musicArr.nomeBanda = music.nomeBanda
-      }
-    }else{
-      const lastId = this.musics.length > 0 ?
-      this.musics[this.musics.length-1].id : 0;
-      music.id = lastId + 1;
-      this.musics.push(music);
+  save(music: Musica): Observable<any> {
+    if (music.id) {
+      return this.http.put(`${this.baseUrl}/alterar/${music.id}`, music);
+    } else {
+      return this.http.post(`${this.baseUrl}/incluir`, music);
     }
-
-    this.storelist();
   }
 
-  delete(id: number){
-    const musicIndex = this.musics.findIndex((value: Music) => value.id == id);
-    this.musics.splice(musicIndex, 1);
-    this.storelist();
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/excluir/${id}`);
   }
-
-
 }
+
+
+
 

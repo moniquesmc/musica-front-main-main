@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MusicFormComponent } from './music-form/music-form.component';
 import { MusicListComponent } from './music-list/music-list.component';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 @NgModule({
@@ -11,8 +12,8 @@ import { MusicListComponent } from './music-list/music-list.component';
     CommonModule, 
     FormsModule, 
     MusicFormComponent,
-    MusicListComponent
-    
+    MusicListComponent,
+    HttpClientModule,
   ]
 })
 export class MusicsModule { }

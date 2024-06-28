@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Music } from '../shared/music';
+import { Musica } from '../shared/musica';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MusicService } from '../shared/music.service';
@@ -13,15 +13,15 @@ import { MusicService } from '../shared/music.service';
   styleUrls: ['./music-list-item.component.scss']
 })
 export class MusicListItemComponent {
-  @Input() music!: Music;
+  @Input() music!: Musica;
 
   constructor(public musicService: MusicService) {}
 
-  onCompletedCheckChange(music: Music) {
+  onCompletedCheckChange(music: Musica) {
     this.musicService.save(music);
   }
 
-  delete(music: Music) {
+  delete(music: Musica) {
     this.musicService.delete(music.id);
   }
 }

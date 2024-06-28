@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Music } from '../shared/music';
+import { Musica } from '../shared/musica';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MusicService } from '../shared/music.service';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 
 })
 export class MusicFormComponent implements OnInit {
-  music: Music = new Music();
+  music: Musica = new Musica();
   title: string = 'Nova Música';
 
   constructor(
@@ -27,7 +27,7 @@ export class MusicFormComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log("Edição do ID:" + id);
     if (id) {
-      const musicAux: Music | undefined = this.musicService.getById(parseInt(id, 10));
+      const musicAux: Musica | undefined = this.musicService.getById(parseInt(id, 10));
       if (musicAux) {
         this.music = musicAux;
         this.title = 'Alterando Música';

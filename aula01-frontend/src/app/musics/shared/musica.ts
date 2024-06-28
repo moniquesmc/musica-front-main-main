@@ -1,7 +1,7 @@
 import { DatePipe } from "@angular/common";
 import { ɵExtraLocaleDataIndex } from "@angular/core";
 
-export class Music {
+export class Musica {
 
     public id!: number ;
 
